@@ -17,6 +17,10 @@ import AnalyzingBehaviorLesson2Practice from "../../modals/mindfulnessCourse/Ana
 import AnalyzingBehaviorLesson2Quiz from "../../modals/mindfulnessCourse/AnalyzingBehaviorLesson2Quiz";
 import axios from "axios";
 import IntroMindfulnessLesson1 from "../../modals/mindfulnessCourse/IntroMindfulnessLesson1";
+import IntroMindfulnessLesson1Practice from "../../modals/mindfulnessCourse/IntroMindfulnessLesson1Practice"; //First import the modal component
+import IntroMindfulnessLesson1Quiz from "../../modals/mindfulnessCourse/IntroMindfulnessLesson1Quiz";
+import IntroMindfulnessLesson2 from "../../modals/mindfulnessCourse/IntroMindfulnessLesson2";
+import IntroMindfulnessLesson2Practice from "../../modals/mindfulnessCourse/IntroMindfulnessLesson2Practice";
 
 export default function MindfulnessCourse() {
     const token = localStorage.getItem('token');
@@ -36,6 +40,10 @@ export default function MindfulnessCourse() {
     const [analyzingBehaviorLesson2PracticeIsOpen, setAnalyzingBehaviorLesson2PracticeIsOpen] = useState(false);
     const [analyzingBehaviorLesson2QuizIsOpen, setAnalyzingBehaviorLesson2QuizIsOpen] = useState(false);
     const [introMindfulnessLesson1IsOpen, setIntroMindfulnessLesson1IsOpen] = useState(false);
+    const [introMindfulnessLesson1PracticeIsOpen, setIntroMindfulnessLesson1PracticeIsOpen] = useState(false); //Then create a state variable to control the modal's visibility
+    const [introMindfulnessLesson1QuizIsOpen, setIntroMindfulnessLesson1QuizIsOpen] = useState(false);
+    const [introMindfulnessLesson2IsOpen, setIntroMindfulnessLesson2IsOpen] = useState(false);
+    const [introMindfulnessLesson2PracticeIsOpen, setIntroMindfulnessLesson2PracticeIsOpen] = useState(false);
 
     const [orientationLesson1PracticeIsActive, setOrientationLesson1PracticeIsActive] = useState(false);
     const [orientationLesson1QuizIsActive, setOrientationLesson1QuizIsActive] = useState(false);
@@ -108,6 +116,10 @@ export default function MindfulnessCourse() {
                 setAnalyzingBehaviorLesson2PracticeIsActive(response.data[0].analyzing_behavior_lesson_2_practice);
                 setAnalyzingBehaviorLesson2QuizIsActive(response.data[0].analyzing_behavior_lesson_2_quiz);
                 setIntroMindfulnessLesson1IsActive(response.data[0].intro_mindfulness_lesson_1);
+                setIntroMindfulnessLesson1PracticeIsActive(response.data[0].intro_mindfulness_lesson_1_practice); //Then set the state variable to the value of the response data from the back end (this way even if you leave the page and come back, the progress will still be saved)
+                setIntroMindfulnessLesson1QuizIsActive(response.data[0].intro_mindfulness_lesson_1_quiz);
+                setIntroMindfulnessLesson2IsActive(response.data[0].intro_mindfulness_lesson_2);
+                setIntroMindfulnessLesson2PracticeIsActive(response.data[0].intro_mindfulness_lesson_2_practice);
             } catch (error) {
                 console.error(error);
             }
@@ -157,13 +169,13 @@ export default function MindfulnessCourse() {
             </div>
             <div className="subCourse">
                 <div className="courseSubHeader">Intro to Mindfulness</div>
-                <div className="subCourseName">Goals of Mindfulness Practice</div>
+                <div className="subCourseName">Goals of Mindfulness</div>
                 <div className={introMindfulnessLesson1IsActive ? "courseLesson" : "courseLesson inactive"} onClick={() => setIntroMindfulnessLesson1IsOpen(true)}><FaBookOpenReader /></div>
-                <div className={introMindfulnessLesson1PracticeIsActive ? "coursePractice" : "coursePractice inactive"}><FaPencilAlt /></div>
-                <div className={introMindfulnessLesson1QuizIsActive ? "courseQuiz" : "courseQuiz inactive"}><FaTrophy /></div>
+                <div className={introMindfulnessLesson1PracticeIsActive ? "coursePractice" : "coursePractice inactive"} onClick={() => setIntroMindfulnessLesson1PracticeIsOpen(true)}><FaPencilAlt /></div>{/*Then add an onClick event to the icon to open the modal*/}
+                <div className={introMindfulnessLesson1QuizIsActive ? "courseQuiz" : "courseQuiz inactive"} onClick={() => setIntroMindfulnessLesson1QuizIsOpen(true)}><FaTrophy /></div>
                 <div className="subCourseName">Wise Mind</div>
-                <div className={introMindfulnessLesson2IsActive ? "courseLesson" : "courseLesson inactive"}><FaBookOpenReader /></div>
-                <div className={introMindfulnessLesson2PracticeIsActive ? "coursePractice" : "coursePractice inactive"}><FaPencilAlt /></div>
+                <div className={introMindfulnessLesson2IsActive ? "courseLesson" : "courseLesson inactive"} onClick={() => setIntroMindfulnessLesson2IsOpen(true)}><FaBookOpenReader /></div>
+                <div className={introMindfulnessLesson2PracticeIsActive ? "coursePractice" : "coursePractice inactive"} onClick={() => setIntroMindfulnessLesson2PracticeIsOpen(true)}><FaPencilAlt /></div>
                 <div className={introMindfulnessLesson2QuizIsActive ? "courseQuiz" : "courseQuiz inactive"}><FaTrophy /></div>
             </div>
             <div className="subCourse">
@@ -226,7 +238,12 @@ export default function MindfulnessCourse() {
             {analyzingBehaviorLesson2IsOpen && <AnalyzingBehaviorLesson2 setAnalyzingBehaviorLesson2IsOpen={setAnalyzingBehaviorLesson2IsOpen} setAnalyzingBehaviorLesson2PracticeIsActive={setAnalyzingBehaviorLesson2PracticeIsActive} />}
             {analyzingBehaviorLesson2PracticeIsOpen && <AnalyzingBehaviorLesson2Practice setAnalyzingBehaviorLesson2PracticeIsOpen={setAnalyzingBehaviorLesson2PracticeIsOpen} setAnalyzingBehaviorLesson2QuizIsActive={setAnalyzingBehaviorLesson2QuizIsActive} />}
             {analyzingBehaviorLesson2QuizIsOpen && <AnalyzingBehaviorLesson2Quiz setAnalyzingBehaviorLesson2QuizIsOpen={setAnalyzingBehaviorLesson2QuizIsOpen} setIntroMindfulnessLesson1IsActive={setIntroMindfulnessLesson1IsActive} />}
-            {introMindfulnessLesson1IsOpen && <IntroMindfulnessLesson1 setIntroMindfulnessLesson1IsOpen={setIntroMindfulnessLesson1IsOpen} />}
+            {introMindfulnessLesson1IsOpen && <IntroMindfulnessLesson1 setIntroMindfulnessLesson1IsOpen={setIntroMindfulnessLesson1IsOpen} setIntroMindfulnessLesson1PracticeIsActive={setIntroMindfulnessLesson1PracticeIsActive} />} {/*Add the state variable and the setter function as props to the modal component*/}
+            {introMindfulnessLesson1PracticeIsOpen && <IntroMindfulnessLesson1Practice setIntroMindfulnessLesson1PracticeIsOpen={setIntroMindfulnessLesson1PracticeIsOpen} setIntroMindfulnessLesson1QuizIsActive={setIntroMindfulnessLesson1QuizIsActive} />} {/*Then add the modal component to the page and pass the setter function as a prop to the modal component*/}
+            {introMindfulnessLesson1QuizIsOpen && <IntroMindfulnessLesson1Quiz setIntroMindfulnessLesson1QuizIsOpen={setIntroMindfulnessLesson1QuizIsOpen} setIntroMindfulnessLesson2IsActive={setIntroMindfulnessLesson2IsActive} />}
+            {introMindfulnessLesson2IsOpen && <IntroMindfulnessLesson2 setIntroMindfulnessLesson2IsOpen={setIntroMindfulnessLesson2IsOpen} setIntroMindfulnessLesson2PracticeIsActive={setIntroMindfulnessLesson2PracticeIsActive} />}
+            {introMindfulnessLesson2PracticeIsOpen && <IntroMindfulnessLesson2Practice setIntroMindfulnessLesson2PracticeIsOpen={setIntroMindfulnessLesson2PracticeIsOpen} /*setIntroMindfulnessLesson2QuizIsActive={setIntroMindfulnessLesson2QuizIsActive}*/ />}
+            {/* {introMindfulnessLesson2QuizIsOpen && <IntroMindfulnessLesson2Quiz setIntroMindfulnessLesson2QuizIsOpen={setIntroMindfulnessLesson2QuizIsOpen} setOptionalSkillsLesson1IsActive={setOptionalSkillsLesson1IsActive} />} */}
             
         </div>
     )

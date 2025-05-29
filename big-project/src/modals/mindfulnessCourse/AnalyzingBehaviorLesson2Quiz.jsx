@@ -261,7 +261,7 @@ function Slide4({setCorrectAnswer}){
 
     return(
         <>
-            <h3 className="slideHeading">Question 1</h3>
+            <h3 className="slideHeading">Question 4</h3>
             <p>Which of these questions appears as part of missing-links analysis?</p>
             
             <div className="checkboxes">

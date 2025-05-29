@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { RiCloseLine } from "react-icons/ri";
 import { MdOutlineScience } from "react-icons/md";
 import { FaLightbulb } from "react-icons/fa";
-// import axios from "axios";
+import axios from "axios";
 
-export default function IntroMindfulnessLesson1({ setIntroMindfulnessLesson1IsOpen }) {
+export default function IntroMindfulnessLesson1({ setIntroMindfulnessLesson1IsOpen, setIntroMindfulnessLesson1PracticeIsActive }) {
     const [currentSlide, setCurrentSlide] = useState(0);
 
     const slides = [
@@ -26,21 +26,21 @@ export default function IntroMindfulnessLesson1({ setIntroMindfulnessLesson1IsOp
         slide16
     ];
 
-    // const handleUpdateCourseProgress = async () => {
-    //     const token = localStorage.getItem('token');
-    //     try {
-    //         const response = await axios.patch('http://127.0.0.1:8000/update_course', {
-    //             analyzing_behavior_lesson_1_practice : true
-    //         }, {
-    //             headers: {
-    //                 'Authorization': `Token ${token}`
-    //             }
-    //         })
-    //         console.log(response.data);
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // }
+    const handleUpdateCourseProgress = async () => {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await axios.patch('http://127.0.0.1:8000/update_course', {
+                intro_mindfulness_lesson_1_practice : true
+            }, {
+                headers: {
+                    'Authorization': `Token ${token}`
+                }
+            })
+            console.log(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     const goToNextSlide = () => {
         setCurrentSlide(() => {
@@ -67,7 +67,7 @@ export default function IntroMindfulnessLesson1({ setIntroMindfulnessLesson1IsOp
             <div className="centered">
                 <div className="modal">
                     <div className="modalHeader">
-                        <h5 className="heading">Goals of Mindfulness Practice</h5>
+                        <h5 className="heading">Goals of Mindfulness</h5>
                     </div>
                     <button className="closeBtn" onClick={() => setIntroMindfulnessLesson1IsOpen(false)}>
                         <RiCloseLine style={{ marginBottom: "-3px" }}/>
@@ -86,8 +86,8 @@ export default function IntroMindfulnessLesson1({ setIntroMindfulnessLesson1IsOp
                             {currentSlide === 0 && <div className="invisoDiv"></div>}
                             {currentSlide === slides.length - 1 && <button className="nextButton" onClick={() => {
                                 setIntroMindfulnessLesson1IsOpen(false);
-                                // setAnalyzingBehaviorLesson1PracticeIsActive(true);
-                                // handleUpdateCourseProgress();
+                                setIntroMindfulnessLesson1PracticeIsActive(true);
+                                handleUpdateCourseProgress();
                                 }}>Finish!</button>}
                             {currentSlide !== slides.length - 1 && <button className="nextButton" onClick={goToNextSlide}>Next</button>}
                         </div>
@@ -103,6 +103,9 @@ function slide1() {
         <>
             <h3 className="slideHeading">Welcome to the Mindfulness Course!</h3>
             <p>In this course, you will be learning all about mindfulness; what it means, what it&apos;s used for, the different areas it covers, and many different ways to practice it. Let&apos;s get started with mindfulness goals!</p>
+            <div className="slideImage">
+                <img src="/pictures/photo-1611800065908-233b597db552.avif" alt="Photo by Shashi Chaturvedula on Unsplash" />
+            </div>
         </>
     )
 }
@@ -155,6 +158,9 @@ function slide4() {
             <p>If you walk across a dark room, is it better to see the furniture or not? Is it easier with the light on or with it off? A fundamental goal of mindFULness is to reduce mindLESSness—both of what is going on around us, and of what we ourselves are doing, thinking, and feeling.</p>
             <br />
             <p>The idea is that if we truly experience each present moment of our lives—if we let go of mental constructs, ideas, and judgments about what is—then we will ultimately see that our worst imaginings of reality are not true. We will at some point see that life itself is unceasing change, and also that clinging to any moment of reality is ultimately not in our best interests.</p>
+            <div className="slideImage">
+                <img src="/pictures/mike-labrum-fvl4b1gjpbk-unsplash.jpg" alt="Photo by Mike Labrum on Unsplash" />
+            </div>
         </>
     )
 }
@@ -184,6 +190,9 @@ function slide6() {
         <>
             <h3 className="slideHeading">Be Present to Others</h3>
             <p>Mindfulness is focusing on the present moment and on the people we are with now. It is very easy to be around people but far away—thinking about something or someone else, looking for someone else to talk to, wishing we were somewhere else, planning what we will do next, dreaming about other things, focusing on our pain or our suffering. We are not present to the people around us. Others, of course, often notice this. They may eventually pull away from us; it is hard for them to be ignored in this way.</p>
+            <div className="slideImage">
+                <img src="/pictures/priscilla-du-preez-cIfLUEZYLVg-unsplash.jpg" alt="Photo by Priscilla Du Preez on Unsplash" />
+            </div>
         </>
     )
 }
@@ -193,6 +202,9 @@ function slide7() {
         <>
             <h3 className="slideHeading">Connection to the Universe</h3>
             <p>Everyone and everything in the universe is connected. As physicists would point out, the universe is a network of interconnected atoms, cells, and particles that are constantly moving and changing. We touch the air around us that touches everything else around us, and on and on. Each move that we make interacts with the entire universe at some point. It is this point that we need to get across. However, knowing that we are interconnected is one thing; experiencing it is another. Many people feel isolated and alone. Their experience of themselves is as outsiders. But once we see that the world and universe is an interconnected network, we can see that there is really no outside or inside. Thus our experience is built on the delusion of separation. Mindfulness is aimed at enhancing our experience of the universe as it is, without delusion or distortion.</p>
+            <div className="slideImage">
+                <img src="/pictures/greg-rakozy-oMpAz-DN-9I-unsplash.jpg" alt="Photo by Greg Rakozy on Unsplash" />
+            </div>
         </>
     )
 }
@@ -296,6 +308,9 @@ function slide15() {
                 <li><span className="bold">Walking or hiking with focused awareness on walking/moving and on the natural world</span></li>
                 <li><span className="bold">Ritual music making</span> (e.g., drumming)</li>
             </ul>
+            <div className="slideImage">
+                <img src="/pictures/david-hofmann-klWtuMJE8Ho-unsplash.jpg" alt="Photo by David Hofmann on Unsplash" />
+            </div>
         </>
     )
 }
