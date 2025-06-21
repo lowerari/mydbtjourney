@@ -21,6 +21,9 @@ import IntroMindfulnessLesson1Practice from "../../modals/mindfulnessCourse/Intr
 import IntroMindfulnessLesson1Quiz from "../../modals/mindfulnessCourse/IntroMindfulnessLesson1Quiz";
 import IntroMindfulnessLesson2 from "../../modals/mindfulnessCourse/IntroMindfulnessLesson2";
 import IntroMindfulnessLesson2Practice from "../../modals/mindfulnessCourse/IntroMindfulnessLesson2Practice";
+import IntroMindfulnessLesson2Quiz from "../../modals/mindfulnessCourse/IntroMindfulnessLesson2Quiz";
+import MindfulnessWhatSkillsLesson1 from "../../modals/mindfulnessCourse/MindfulnessWhatSkillsLesson1";
+import MindfulnessWhatSkillsLesson1Practice from "../../modals/mindfulnessCourse/MindfulnessWhatSkillsLesson1Practice";
 
 export default function MindfulnessCourse() {
     const token = localStorage.getItem('token');
@@ -44,6 +47,9 @@ export default function MindfulnessCourse() {
     const [introMindfulnessLesson1QuizIsOpen, setIntroMindfulnessLesson1QuizIsOpen] = useState(false);
     const [introMindfulnessLesson2IsOpen, setIntroMindfulnessLesson2IsOpen] = useState(false);
     const [introMindfulnessLesson2PracticeIsOpen, setIntroMindfulnessLesson2PracticeIsOpen] = useState(false);
+    const [introMindfulnessLesson2QuizIsOpen, setIntroMindfulnessLesson2QuizIsOpen] = useState(false);
+    const [mindfulnessWhatSkillsLesson1IsOpen, setMindfulnessWhatSkillsLesson1IsOpen] = useState(false);
+    const [mindfulnessWhatSkillsLesson1PracticeIsOpen, setMindfulnessWhatSkillsLesson1PracticeIsOpen] = useState(false);
 
     const [orientationLesson1PracticeIsActive, setOrientationLesson1PracticeIsActive] = useState(false);
     const [orientationLesson1QuizIsActive, setOrientationLesson1QuizIsActive] = useState(false);
@@ -120,6 +126,9 @@ export default function MindfulnessCourse() {
                 setIntroMindfulnessLesson1QuizIsActive(response.data[0].intro_mindfulness_lesson_1_quiz);
                 setIntroMindfulnessLesson2IsActive(response.data[0].intro_mindfulness_lesson_2);
                 setIntroMindfulnessLesson2PracticeIsActive(response.data[0].intro_mindfulness_lesson_2_practice);
+                setIntroMindfulnessLesson2QuizIsActive(response.data[0].intro_mindfulness_lesson_2_quiz);
+                setMindfulnessWhatSkillsLesson1IsActive(response.data[0].mindfulness_what_skills_lesson_1);
+                setMindfulnessWhatSkillsLesson1PracticeIsActive(response.data[0].mindfulness_what_skills_lesson_1_practice);
             } catch (error) {
                 console.error(error);
             }
@@ -176,13 +185,13 @@ export default function MindfulnessCourse() {
                 <div className="subCourseName">Wise Mind</div>
                 <div className={introMindfulnessLesson2IsActive ? "courseLesson" : "courseLesson inactive"} onClick={() => setIntroMindfulnessLesson2IsOpen(true)}><FaBookOpenReader /></div>
                 <div className={introMindfulnessLesson2PracticeIsActive ? "coursePractice" : "coursePractice inactive"} onClick={() => setIntroMindfulnessLesson2PracticeIsOpen(true)}><FaPencilAlt /></div>
-                <div className={introMindfulnessLesson2QuizIsActive ? "courseQuiz" : "courseQuiz inactive"}><FaTrophy /></div>
+                <div className={introMindfulnessLesson2QuizIsActive ? "courseQuiz" : "courseQuiz inactive"} onClick={() => setIntroMindfulnessLesson2QuizIsOpen(true)}><FaTrophy /></div>
             </div>
             <div className="subCourse">
                 <div className="courseSubHeader">Mindfulness "What" Skills</div>
                 <div className="subCourseName">Observe</div>
-                <div className={mindfulnessWhatSkillsLesson1IsActive ? "courseLesson" : "courseLesson inactive"}><FaBookOpenReader /></div>
-                <div className={mindfulnessWhatSkillsLesson1PracticeIsActive ? "coursePractice" : "coursePractice inactive"}><FaPencilAlt /></div>
+                <div className={mindfulnessWhatSkillsLesson1IsActive ? "courseLesson" : "courseLesson inactive"} onClick={() => setMindfulnessWhatSkillsLesson1IsOpen(true)}><FaBookOpenReader /></div>
+                <div className={mindfulnessWhatSkillsLesson1PracticeIsActive ? "coursePractice" : "coursePractice inactive"} onClick={() => setMindfulnessWhatSkillsLesson1PracticeIsOpen(true)}><FaPencilAlt /></div>
                 <div className={mindfulnessWhatSkillsLesson1QuizIsActive ? "courseQuiz" : "courseQuiz inactive"}><FaTrophy /></div>
                 <div className="subCourseName">Describe</div>
                 <div className={mindfulnessWhatSkillsLesson2IsActive ? "courseLesson" : "courseLesson inactive"}><FaBookOpenReader /></div>
@@ -242,9 +251,12 @@ export default function MindfulnessCourse() {
             {introMindfulnessLesson1PracticeIsOpen && <IntroMindfulnessLesson1Practice setIntroMindfulnessLesson1PracticeIsOpen={setIntroMindfulnessLesson1PracticeIsOpen} setIntroMindfulnessLesson1QuizIsActive={setIntroMindfulnessLesson1QuizIsActive} />} {/*Then add the modal component to the page and pass the setter function as a prop to the modal component*/}
             {introMindfulnessLesson1QuizIsOpen && <IntroMindfulnessLesson1Quiz setIntroMindfulnessLesson1QuizIsOpen={setIntroMindfulnessLesson1QuizIsOpen} setIntroMindfulnessLesson2IsActive={setIntroMindfulnessLesson2IsActive} />}
             {introMindfulnessLesson2IsOpen && <IntroMindfulnessLesson2 setIntroMindfulnessLesson2IsOpen={setIntroMindfulnessLesson2IsOpen} setIntroMindfulnessLesson2PracticeIsActive={setIntroMindfulnessLesson2PracticeIsActive} />}
-            {introMindfulnessLesson2PracticeIsOpen && <IntroMindfulnessLesson2Practice setIntroMindfulnessLesson2PracticeIsOpen={setIntroMindfulnessLesson2PracticeIsOpen} /*setIntroMindfulnessLesson2QuizIsActive={setIntroMindfulnessLesson2QuizIsActive}*/ />}
-            {/* {introMindfulnessLesson2QuizIsOpen && <IntroMindfulnessLesson2Quiz setIntroMindfulnessLesson2QuizIsOpen={setIntroMindfulnessLesson2QuizIsOpen} setOptionalSkillsLesson1IsActive={setOptionalSkillsLesson1IsActive} />} */}
-            
+            {introMindfulnessLesson2PracticeIsOpen && <IntroMindfulnessLesson2Practice setIntroMindfulnessLesson2PracticeIsOpen={setIntroMindfulnessLesson2PracticeIsOpen} setIntroMindfulnessLesson2QuizIsActive={setIntroMindfulnessLesson2QuizIsActive} />}
+            {introMindfulnessLesson2QuizIsOpen && <IntroMindfulnessLesson2Quiz setIntroMindfulnessLesson2QuizIsOpen={setIntroMindfulnessLesson2QuizIsOpen} setMindfulnessWhatSkillsLesson1IsActive={setMindfulnessWhatSkillsLesson1IsActive} />}
+            {mindfulnessWhatSkillsLesson1IsOpen && <MindfulnessWhatSkillsLesson1 setMindfulnessWhatSkillsLesson1IsOpen={setMindfulnessWhatSkillsLesson1IsOpen} setMindfulnessWhatSkillsLesson1PracticeIsActive={setMindfulnessWhatSkillsLesson1PracticeIsActive} />}
+            {mindfulnessWhatSkillsLesson1PracticeIsOpen && <MindfulnessWhatSkillsLesson1Practice setMindfulnessWhatSkillsLesson1PracticeIsOpen={setMindfulnessWhatSkillsLesson1PracticeIsOpen} /*setMindfulnessWhatSkillsLesson1QuizIsActive={setMindfulnessWhatSkillsLesson1QuizIsActive}*/ />}
+
+            {/* Add more modals as needed for the rest of the course */}
         </div>
     )
 }

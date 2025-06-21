@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { RiCloseLine } from "react-icons/ri";
 import axios from "axios";
 
-export default function IntroMindfulnessLesson1Practice({ setIntroMindfulnessLesson2PracticeIsOpen, }) {
+export default function IntroMindfulnessLesson1Practice({ setIntroMindfulnessLesson2PracticeIsOpen, setIntroMindfulnessLesson2QuizIsActive }) {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [formData, setFormData] = useState([
         {},
@@ -49,21 +49,21 @@ export default function IntroMindfulnessLesson1Practice({ setIntroMindfulnessLes
         });
     };
 
-    // const handleUpdateCourseProgress = async () => {
-    //     const token = localStorage.getItem('token');
-    //     try {
-    //         const response = await axios.patch('http://127.0.0.1:8000/update_course', {
-    //             intro_mindfulness_lesson_2_quiz : true
-    //         }, {
-    //             headers: {
-    //                 'Authorization': `Token ${token}`
-    //             }
-    //         })
-    //         console.log(response.data);
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // }
+    const handleUpdateCourseProgress = async () => {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await axios.patch('http://127.0.0.1:8000/update_course', {
+                intro_mindfulness_lesson_2_quiz : true
+            }, {
+                headers: {
+                    'Authorization': `Token ${token}`
+                }
+            })
+            console.log(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
 
     return(
@@ -94,8 +94,8 @@ export default function IntroMindfulnessLesson1Practice({ setIntroMindfulnessLes
                             {currentSlide === 0 && <div className="invisoDiv"></div>}
                             {currentSlide === slides.length - 1 && <button className="nextButton" onClick={() => {
                                 setIntroMindfulnessLesson2PracticeIsOpen(false);
-                                //setIntroMindfulnessLesson2QuizIsActive(true);
-                                //handleUpdateCourseProgress();
+                                setIntroMindfulnessLesson2QuizIsActive(true);
+                                handleUpdateCourseProgress();
                                 }}>Finish!</button>}
                             {currentSlide !== slides.length - 1 && <button className="nextButton" onClick={goToNextSlide}>Next</button>}
                         </div>
